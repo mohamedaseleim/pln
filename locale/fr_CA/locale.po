@@ -1,0 +1,406 @@
+# Martin Brändle <martin.braendle@uzh.ch>, 2022.
+# Pierre Lasou <pierre.lasou@bibl.ulaval.ca>, 2023.
+# Marie-Hélène Vézina [UdeMontréal] <marie-helene.vezina@umontreal.ca>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-03T23:08:22+00:00\n"
+"PO-Revision-Date: 2023-04-24 10:30+0000\n"
+"Last-Translator: Marie-Hélène Vézina [UdeMontréal] <marie-helene."
+"vezina@umontreal.ca>\n"
+"Language-Team: French (Canada) <http://translate.pkp.sfu.ca/projects/plugins/"
+"pln/fr_CA/>\n"
+"Language: fr_CA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.13.1\n"
+
+msgid "plugins.generic.pln"
+msgstr "Plugiciel PKP PN"
+
+msgid "plugins.generic.pln.description"
+msgstr "Le Plugiciel PKP PN déposera votre contenu publié dans le réseau privé LOCKSS de PKP pour préservation."
+
+msgid "plugins.generic.pln.manager.setup.description"
+msgstr "<strong>Réseau privé LOCKSS de PKP</strong><br /><br />Veuillez lire le <a href=\"https://pkp.sfu.ca/pkp-pn/\" target=\"_blank\">guide de PKP PN</a> et compléter <a href=\"{$plnPluginURL}\">ce simple formulaire</a>. Cette option permettra l'inclusion de votre revue dans le réseau LOCKSS privé du Public Project Knowledge (PKP PN)."
+
+msgid "plugins.generic.pln.settings"
+msgstr "Paramètres"
+
+msgid "plugins.generic.pln.settings.saved"
+msgstr "Paramètres de PKP PN enregistrés."
+
+msgid "plugins.generic.pln.settings.terms_of_use"
+msgstr "Conditions d'utilisation"
+
+msgid "plugins.generic.pln.settings.terms_of_use_help"
+msgstr ""
+"En tant que gestionnaire de revue, en toute bonne foi, j'accepte et confirme "
+"les termes et conditions de participation du Public Knowledge Project’s "
+"Preservation Network (PKP-PN) :"
+
+msgid "plugins.generic.pln.settings.terms_of_use_agree"
+msgstr "J'accepte"
+
+msgid "plugins.generic.pln.settings.journal_uuid"
+msgstr "Identifiant de la revue"
+
+msgid "plugins.generic.pln.settings.journal_uuid_help"
+msgstr "Ceci est l’identifiant unique de votre revue pour PKP PN. Vous devrez probablement le partager avec les administrateurs de PKP PN en cas de demande de support."
+
+msgid "plugins.generic.pln.settings.refresh"
+msgstr "Rafraîchir"
+
+msgid "plugins.generic.pln.settings.refresh_help"
+msgstr ""
+"Si pour quelques raisons, il n'y aucun terme listé ci-dessus, ou si vous "
+"savez que ces termes ont été mis à jour, cliquez sur rafraîchir pour mettre "
+"à jour les termes listés ci-dessus."
+
+msgid "plugins.generic.pln.required.object_type"
+msgstr "Veuillez choisir un type d'objet pour le dépôt."
+
+msgid "plugins.generic.pln.required.object_threshold"
+msgstr "Veuillez choisir un seuil d'objet de dépôt."
+
+msgid "plugins.generic.pln.required.terms_of_use_agreement"
+msgstr "L'acceptation des conditions d'utilisation du réseau est requise pour déposer sur le PN."
+
+msgid "plugins.generic.pln.objects.article"
+msgstr "Article"
+
+msgid "plugins.generic.pln.objects.issue"
+msgstr "Numéro"
+
+msgid "plugins.generic.pln.status.network_status"
+msgstr "Statut du réseau: {$networkStatusMessage}"
+
+msgid "plugins.generic.pln.status.deposits"
+msgstr "Dépôt"
+
+msgid "plugins.generic.pln.status"
+msgstr "Statut"
+
+msgid "plugins.generic.pln.status.id"
+msgstr "ID"
+
+msgid "plugins.generic.pln.status.type"
+msgstr "Type"
+
+msgid "plugins.generic.pln.status.items"
+msgstr "Objets"
+
+msgid "plugins.generic.pln.status.packaged"
+msgstr "Emballé"
+
+msgid "plugins.generic.pln.status.transferred"
+msgstr "Transferré"
+
+msgid "plugins.generic.pln.status.received"
+msgstr "Reçu"
+
+msgid "plugins.generic.pln.status.syncing"
+msgstr "En synchronisation"
+
+msgid "plugins.generic.pln.status.synced"
+msgstr "Synchronisé"
+
+msgid "plugins.generic.pln.status.updated"
+msgstr "Mis à jour"
+
+msgid "plugins.generic.pln.status.local_failure"
+msgstr "Échec local"
+
+msgid "plugins.generic.pln.status.remote_failure"
+msgstr "Échec distant"
+
+msgid "plugins.generic.pln.status.reset"
+msgstr "Réinitialiser"
+
+msgid "plugins.generic.pln.status.yes"
+msgstr "Oui"
+
+msgid "plugins.generic.pln.status.no"
+msgstr "Non"
+
+msgid "plugins.generic.pln.depositorTask.name"
+msgstr "Tâche de dépôt PKP PN"
+
+msgid "plugins.generic.pln.notifications.processing_for"
+msgstr "Traitement des déposants pour {$title}."
+
+msgid "plugins.generic.pln.notifications.pln_not_accepting"
+msgstr "Le PKP PN n'accepte pas les dépôts actuellement."
+
+msgid "plugins.generic.pln.notifications.pln_accepting"
+msgstr "Le PKP PN accepte les dépôts."
+
+msgid "plugins.generic.pln.notifications.check_status"
+msgstr "Vérifier les statuts de vos dépôts."
+
+msgid "plugins.generic.pln.notifications.issn_missing"
+msgstr "Votre revue doit avoir un ISSN pour déposer son contenu à PKP PN."
+
+msgid "plugins.generic.pln.notifications.http_error"
+msgstr ""
+"Une erreur est survenue pendant la connexion à PKP PN - veuillez contacter "
+"votre administrateur système."
+
+msgid "plugins.generic.pln.notifications.terms_updated"
+msgstr "Les conditions d'utilisation de PKP PN ont été mises à jour. L'acceptation des nouvelles conditions sont requises avant de continuer à déposer."
+
+msgid "plugins.generic.pln.notifications.zip_missing"
+msgstr "Le support ZipArchive doit être activé avant de procéder."
+
+msgid "plugins.generic.pln.settings.acron_required"
+msgstr "Le plugiciel PKP PN exige le plugiciel Acron ou des outils de planification périodiques comme 'cron'."
+
+msgid "plugins.generic.pln.status.docs"
+msgstr "Les statuts de dépôt du PKP PN <a href=\"{$statusDocsUrl}\">sont décrits ici</a>."
+
+msgid "plugins.generic.pln.status.checked"
+msgstr "Vérifié"
+
+msgid "plugins.generic.pln.status.local_status"
+msgstr "Statut local"
+
+msgid "plugins.generic.pln.status.processing_status"
+msgstr "Statut de traitement"
+
+msgid "plugins.generic.pln.status.lockss_status"
+msgstr "Statut de LOCKSS"
+
+msgid "plugins.generic.pln.status.complete"
+msgstr "Complet"
+
+msgid "plugins.generic.pln.status.confirmReset"
+msgstr "Êtes-vous sûr de vouloir réinitialiser ce dépôt ? Il sera reconstitué et renvoyé au serveur de traitement."
+
+msgid "plugins.generic.pln.status.unknown"
+msgstr "Inconnu"
+
+msgid "plugins.generic.pln.status.new"
+msgstr "Nouveau"
+
+msgid "plugins.generic.pln.status.validated"
+msgstr "Validé"
+
+msgid "plugins.generic.pln.status.sent"
+msgstr "Envoyé à LOCKSS"
+
+msgid "plugins.generic.pln.status.agreement"
+msgstr "Accord"
+
+msgid "plugins.generic.pln.notifications.getting_servicedocument"
+msgstr "Obtenir le document de service."
+
+msgid "plugins.generic.pln.notifications.issn_setting"
+msgstr "Votre revue doit avoir un ISSN pour pouvoir accepter les conditions d'utilisation. Vous pouvez entrer votre ISSN dans les paramètres de votre revue. Une fois l'ISSN de la revue ajouté, les conditions d'utilisation seront affichées ci-dessous."
+
+msgid "plugins.generic.pln.error.network.servicedocument"
+msgstr "Erreur réseau {$error} connexion au PKP PN pour obtenir le document de service."
+
+msgid "plugins.generic.pln.error.network.deposit"
+msgstr "Erreur réseau {$error} connexion au PKP PN pour envoyer le dépôt."
+
+msgid "plugins.generic.pln.error.network.swordstatement"
+msgstr "Erreur réseau {$error} connexion au PKP PN pour obtenir une mise à jour du statut du dépôt."
+
+msgid "plugins.generic.pln.error.http.servicedocument"
+msgstr "Erreur HTTP {$error} envoyée par le serveur PKP PN lors d'une tentative de connexion au document de service.\n"
+"{$message}"
+
+msgid "plugins.generic.pln.error.http.deposit"
+msgstr "Erreur HTTP {$error} envoyée par le serveur PKP PN lors de l'envoi du dépôt.\n"
+"{$message}"
+
+msgid "plugins.generic.pln.error.http.swordstatement"
+msgstr "Erreur HTTP {$error} envoyée par le serveur PKP PN lors de la vérification du statut d'un dépôt.\n"
+"{$message}"
+
+msgid "plugins.generic.pln.error.depositor.missingpackage"
+msgstr "Impossible de trouver le dossier compressé {$file}."
+
+msgid "plugins.generic.pln.error.depositor.export.articles.error"
+msgstr "Une erreur s'est produite pendant l'exportation des articles. Consultez le fichier d'erreur (log) du serveur pour plus d'informations."
+
+msgid "plugins.generic.pln.error.depositor.export.issue.error"
+msgstr "Une erreur s'est produite pendant l'exportation d'un numéro. Consultez le fichier d'erreur (log) du serveur pour plus d'informations."
+
+msgid "plugins.generic.pln.error.handler.uuid.invalid"
+msgstr "L'UUID demandé n'est pas valide ou n'est pas formaté correctement."
+
+msgid "plugins.generic.pln.error.handler.uuid.notfound"
+msgstr "Il n'y a aucun dépôt associé à l'UUID demandé."
+
+msgid "plugins.generic.pln.error.handler.file.notfound"
+msgstr "Le fichier de dépôt ne peut être trouvé. Il n'a peut être pas encore été paqueté ou a été supprimé."
+
+msgid "plugins.generic.pln.depositor.statusupdates"
+msgstr "Le statut du traitement du dépôt a été mis à jour."
+
+msgid "plugins.generic.pln.depositor.updatedcontent"
+msgstr "Traitement de contenu mis à jour."
+
+msgid "plugins.generic.pln.depositor.newcontent"
+msgstr "Nouveau contenu en traitement."
+
+msgid "plugins.generic.pln.depositor.packagingdeposits"
+msgstr "Paquetage de contenu pour le dépôt en cours."
+
+msgid "plugins.generic.pln.depositor.transferringdeposits"
+msgstr "Envoi des dépôts au PKP PN en cours."
+
+msgid "plugins.generic.plngateway.displayName"
+msgstr "Passerelle PN"
+
+msgid "plugins.generic.plngateway.description"
+msgstr "Rapporte le statut du PKP PN et les titres d'article récents pour le serveur de test."
+
+#, fuzzy
+msgid "plugins.generic.pln.depositor.packagingdeposits.processing.packageSucceeded"
+msgstr "Emballage du dépôt {$depositId} réussi"
+
+msgid "plugins.generic.pln.depositor.transferringdeposits.processing.postAtom"
+msgstr ""
+"Envoi du fichier Atom au serveur de transit pour le dépôt {$depositId} ("
+"Statut local : [{$statusLocal}], Statut de traitement : [{$statusProcessing}]"
+", Statut Lockss : [{$statusLockss}]) - (Url : [{$url}], AtomPath : "
+"[{$atomPath}], Méthode : [{$method}])"
+
+#, fuzzy
+msgid "plugins.generic.pln.depositor.transferringdeposits.processing.resultFailed"
+msgstr ""
+"L'envoi du fichier Atom au serveur de transit pour le dépôt {$depositId} a "
+"échoué (Erreur : [{$error} - [{$result}]])"
+
+msgid "plugins.generic.pln.displayedstatus.pending.description"
+msgstr "Le processus de dépôt n'a pas encore commencé"
+
+msgid "plugins.generic.pln.displayedstatus.completed"
+msgstr "Terminé"
+
+msgid "plugins.generic.pln.displayedstatus.completed.description"
+msgstr "Processus de dépôt terminé"
+
+msgid "plugins.generic.pln.displayedstatus.error"
+msgstr "Erreur"
+
+msgid "plugins.generic.pln.displayedstatus.error.description"
+msgstr "Une erreur est survenue concernant le processus de dépôt"
+
+msgid "plugins.generic.pln.status.warning"
+msgstr "Le traitement complet d'un dépôt peut prendre plusieurs jours."
+
+msgid "plugins.generic.pln.status.description.title"
+msgstr "Description du statut"
+
+msgid "plugins.generic.pln.status.error.deposit-error"
+msgstr ""
+"Échec du dépôt, assurez-vous que le dépôt ne dépasse pas la taille maximum "
+"autorisée par le réseau de préservation"
+
+msgid "plugins.generic.pln.status.error.reserialize-error"
+msgstr "Échec du réemballage du dépôt, l'opération sera relancée de nouveau"
+
+msgid "plugins.generic.pln.status.error.xml-error"
+msgstr ""
+"Le dépôt n'a pas passé l'étape de validation de contenu, vous devriez "
+"essayer de renvoyer le dépôt"
+
+msgid "plugins.generic.pln.status.error.status-error"
+msgstr ""
+"Le dépôt est en cours de préservation, mais il n'a pas été possible de "
+"vérifier son statut, l'opération sera réessayée"
+
+#, fuzzy
+msgid "plugins.generic.pln.status.error.hold"
+msgstr ""
+"Le dépôt a été retenu, la version de votre système est supérieure à ses "
+"attentes"
+
+msgid "plugins.generic.pln.status.status"
+msgstr "Statut"
+
+msgid "plugins.generic.pln.depositor.statusupdates.processing"
+msgstr ""
+"Tentative de mise à jour du statut de {$depositId} ({$objectType} : "
+"{$objectId}) (Statut local : [{$statusLocal}], Statut de traitement : "
+"[{$statusProcessing}], Statut de Lockss : [{$statusLockss}])"
+
+#, fuzzy
+msgid "plugins.generic.pln.depositor.packagingdeposits.processing"
+msgstr ""
+"Tentative de dépôt de l'emballage {$depositId} ({$objectType}: {$objectId}) ("
+"Statut local : [{$statusLocal}], Statut de traitement : [{$statusProcessing}]"
+", Statut Lockss : [{$statusLockss}])"
+
+msgid "plugins.generic.pln.status.error.harvest-error"
+msgstr ""
+"Échec de téléchargement du dépôt à partir de votre système. L'opération sera "
+"tentée de nouveau, en attendant, vous pourriez vérifier si votre système est "
+"protégé par un pare-feu"
+
+msgid "plugins.generic.pln.status.error.virus-error"
+msgstr ""
+"Le dépôt a été stoppé suite à la vérification anti-virus, vous devriez "
+"vérifier le.s fichier.s et réessayer"
+
+msgid "plugins.generic.pln.status.error.payload-error"
+msgstr ""
+"Le dépôt n'a pas passé la validation de charge utile, vous pouvez essayer de "
+"renvoyer le dépôt"
+
+msgid "plugins.generic.pln.status.error.bag-error"
+msgstr ""
+"Le dépôt n'a pas passé l'étape de validation du sac de données, vous devriez "
+"essayer de renvoyer le dépôt"
+
+msgid "plugins.generic.pln.depositor.packagingdeposits.processing.error"
+msgstr ""
+"Le plugiciel d'importation et d'exportation natif a échoué pour le dépôt : "
+"{$depositId}, au moment de l'emballage"
+
+msgid "plugins.generic.pln.objectId"
+msgstr "Identifiant du type d'objet"
+
+msgid "plugins.generic.pln.issueId"
+msgstr "Identifiant du numéro"
+
+#, fuzzy
+msgid "plugins.generic.pln.status.packagingFailed"
+msgstr "Échec de l'emballage"
+
+msgid "plugins.generic.pln.status.latestupdate"
+msgstr "Dernière mise à jour"
+
+msgid "plugins.generic.pln.displayedstatus.inprogress"
+msgstr "En cours"
+
+msgid "plugins.generic.pln.displayedstatus.inprogress.description"
+msgstr "Processus de dépôt en cours"
+
+msgid "plugins.generic.pln.depositor.statusupdates.processing.processingState"
+msgstr ""
+"Le statut de traitement obtenu pour {$depositId} -> ({$processingState})"
+
+#, fuzzy
+msgid "plugins.generic.pln.depositor.packagingdeposits.processing.packageFailed"
+msgstr "L'emballage pour le dépôt {$depositId} a échoué"
+
+msgid "plugins.generic.pln.depositor.transferringdeposits.processing"
+msgstr ""
+"Tentative de transfert du dépôt {$depositId} ({$objectType}: {$objectId}) ("
+"Statut local : [{$statusLocal}], Statut de traitement : [{$statusProcessing}]"
+", Statut Lockss : [{$statusLockss}])"
+
+#, fuzzy
+msgid "plugins.generic.pln.depositor.transferringdeposits.processing.resultSucceeded"
+msgstr ""
+"Envoi du fichier Atom au serveur de transit pour le dépôt {$depositId} réussi"
+
+msgid "plugins.generic.pln.displayedstatus.pending"
+msgstr "En attente"

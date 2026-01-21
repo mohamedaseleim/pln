@@ -1,0 +1,42 @@
+<!--
+ * handshake.dtd
+ *
+ * Copyright (c) 2014-2023 Simon Fraser University
+ * Copyright (c) 2000-2023 John Willinsky
+ * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
+ *
+ * DTD for the plugin handshake
+ -->
+
+<!-- Top-level collection containers for batch importing -->
+<!ELEMENT handshake (ojsInfo, pluginInfo, journalInfo)>
+
+<!ELEMENT ojsInfo (release)>
+<!ELEMENT release (#PCDATA)>
+
+<!ELEMENT pluginInfo (release, releaseDate, installed, current, php, zipArchive, tasks, terms)>
+<!ELEMENT releaseDate (#PCDATA)>
+<!ELEMENT current (#PCDATA)>
+<!ELEMENT php (#PCDATA)>
+<!ELEMENT zipArchive (#PCDATA)>
+<!ELEMENT tasks (#PCDATA)>
+
+<!ELEMENT terms (term*)>
+<!ATTLIST terms
+	termsAccepted (yes|no) #REQUIRED>
+
+<!ELEMENT term (#PCDATA)>
+<!ATTLIST term
+	key CDATA #REQUIRED
+	updated CDATA #REQUIRED
+	accepted CDATA #REQUIRED>
+<!ELEMENT network (#PCDATA)>
+
+<!ELEMENT journalInfo (title, articles)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT articles (article*)>
+<!ATTLIST articles
+	count CDATA #REQUIRED>
+<!ELEMENT article (#PCDATA)>
+<!ATTLIST article
+	pubDate CDATA #REQUIRED>
