@@ -4,17 +4,17 @@
 <!--
  * version.xml
  *
- * Copyright (c) 2014-2023 Simon Fraser University
- * Copyright (c) 2000-2023 John Willinsky
+ * Copyright (c) 2014-2026 Simon Fraser University
+ * Copyright (c) 2000-2026 John Willinsky
  * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
  *
- * Plugin version information.
+ * Plugin version information for OJS 3.5.x
  -->
 <version>
 	<application>pln</application>
 	<type>plugins.generic</type>
-	<release>3.0.0.1</release><!-- The range 3.x.x.x is reserved for OJS 3.4 -->
-	<date>2024-11-21</date>
+	<release>3.5.0.3</release>
+	<date>2026-01-21</date>
 	<lazy-load>1</lazy-load>
 	<sitewide>0</sitewide>
 	<class>PlnPlugin</class>
