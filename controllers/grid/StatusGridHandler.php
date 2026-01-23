@@ -1,17 +1,5 @@
 <?php
 
-/**
- * @file controllers/grid/StatusGridHandler.php
- *
- * Copyright (c) 2014-2023 Simon Fraser University
- * Copyright (c) 2000-2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
- *
- * @class StatusGridHandler
- *
- * @brief Handle PLNStatus grid requests.
- */
-
 namespace APP\plugins\generic\pln\controllers\grid;
 
 use APP\core\Request;
@@ -21,7 +9,6 @@ use PKP\controllers\grid\feature\PagingFeature;
 use PKP\controllers\grid\GridColumn;
 use PKP\controllers\grid\GridHandler;
 use PKP\core\JSONMessage;
-use PKP\db\DAO;
 use PKP\security\authorization\ContextAccessPolicy;
 use PKP\security\Role;
 
@@ -113,15 +100,17 @@ class StatusGridHandler extends GridHandler
     public function resetDeposit(array $args, Request $request): JSONMessage
     {
         $depositId = $args['depositId'];
-        $journal = $request->getJournal();
+        $context = $request->getContext();
 
         if ($depositId) {
-            $deposit = Repository::instance()->get($depositId, $journal->getId());
-            $deposit->setNewStatus();
-            Repository::instance()->edit($deposit);
+            $deposit = Repository::instance()->get($depositId, $context->getId());
+            if ($deposit) {
+                $deposit->setNewStatus();
+                Repository::instance()->edit($deposit);
+            }
         }
 
-        return DAO::getDataChangedEvent();
+        return new JSONMessage(true);
     }
 }
 
