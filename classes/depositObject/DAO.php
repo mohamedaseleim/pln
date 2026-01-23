@@ -1,19 +1,5 @@
 <?php
 
-/**
- * @file classes/depositObject/DAO.php
- *
- * Copyright (c) 2023 Simon Fraser University
- * Copyright (c) 2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
- *
- * @class DAO
- *
- * @see DepositObject
- *
- * @brief Operations for retrieving and modifying deposit object objects.
- */
-
 namespace APP\plugins\generic\pln\classes\depositObject;
 
 use APP\facades\Repo;
@@ -171,18 +157,11 @@ class DAO extends EntityDAO
             ->filterByPublished(true)
             ->getQueryBuilder()
             ->join('pln_deposit_objects AS do', 'do.object_id', '=', 'i.issue_id')
-            ->join(
-                'publication_settings AS ps',
-                fn (JoinClause $j) => $j
-                    ->on(DB::raw('CAST(i.issue_id AS CHAR)'), '=', 'ps.setting_value')
-                    ->where('ps.setting_name', '=', 'issueId')
-            )
-            ->join(
-                'publications AS p',
-                fn (JoinClause $j) => $j
-                    ->on('p.publication_id', '=', 'ps.publication_id')
-                    ->where('p.status', '=', Submission::STATUS_PUBLISHED)
-            )
+            // OJS 3.5 Optimization: Join directly with publications table using issue_id
+            ->join('publications AS p', function (JoinClause $j) {
+                $j->on('p.issue_id', '=', 'i.issue_id')
+                  ->where('p.status', '=', Submission::STATUS_PUBLISHED);
+            })
             ->join('submissions AS s', 's.current_publication_id', '=', 'p.publication_id')
             ->where('do.object_type', '=', PlnPlugin::DEPOSIT_TYPE_ISSUE)
             ->where(
