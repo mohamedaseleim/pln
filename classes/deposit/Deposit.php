@@ -1,24 +1,12 @@
 <?php
 
-/**
- * @file classes/deposit/Deposit.php
- *
- * Copyright (c) 2014-2023 Simon Fraser University
- * Copyright (c) 2000-2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
- *
- * @class Deposit
- *
- * @brief Container for deposit objects that are submitted to a PLN
- */
-
 namespace APP\plugins\generic\pln\classes\deposit;
 
 use APP\plugins\generic\pln\classes\depositObject\Repository;
 use APP\plugins\generic\pln\PlnPlugin;
 use Illuminate\Support\LazyCollection;
 use PKP\core\DataObject;
-use PKP\core\PKPString;
+use Ramsey\Uuid\Uuid;
 
 class Deposit extends DataObject
 {
@@ -30,7 +18,7 @@ class Deposit extends DataObject
         parent::__construct();
 
         //Set up new deposits with a UUID
-        $this->setUUID($uuid ?: PKPString::generateUUID());
+        $this->setUUID($uuid ?: Uuid::uuid4()->toString());
     }
 
     /**
