@@ -1,17 +1,5 @@
 <?php
 
-/**
- * @file pages/PageHandler.php
- *
- * Copyright (c) 2014-2023 Simon Fraser University
- * Copyright (c) 2000-2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
- *
- * @class PageHandler
- *
- * @brief Handle PLN requests
- */
-
 namespace APP\plugins\generic\pln\pages;
 
 use APP\core\Request;
@@ -20,7 +8,6 @@ use APP\plugins\generic\pln\classes\deposit\Repository;
 use APP\plugins\generic\pln\classes\DepositPackage;
 use APP\plugins\generic\pln\PlnPlugin;
 use APP\template\TemplateManager;
-use PKP\core\PKPString;
 use PKP\file\FileManager;
 use PKP\security\authorization\ContextRequiredPolicy;
 
@@ -49,7 +36,7 @@ class PageHandler extends Handler
      */
     public function deposits(array $args, Request $request): bool
     {
-        $journal = $request->getJournal();
+        $context = $request->getContext();
         $fileManager = new FileManager();
         $dispatcher = $request->getDispatcher();
 
@@ -63,7 +50,7 @@ class PageHandler extends Handler
 
         $deposit = Repository::instance()
             ->getCollector()
-            ->filterByContextIds([$journal->getId()])
+            ->filterByContextIds([$context->getId()])
             ->filterByUUIDs([$depositUuid])
             ->getMany()
             ->first();
@@ -81,7 +68,7 @@ class PageHandler extends Handler
             $dispatcher->handle404();
         }
 
-        return $fileManager->downloadByPath($depositBag, PKPString::mime_content_type($depositBag), true);
+        return $fileManager->downloadByPath($depositBag, mime_content_type($depositBag), true);
     }
 
     /**
