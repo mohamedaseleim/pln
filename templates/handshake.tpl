@@ -1,12 +1,3 @@
-{**
- * templates/handshake.tpl
- *
- * Copyright (c) 2014-2026 Simon Fraser University
- * Copyright (c) 2000-2026 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
- *
- * Handshake template
- *}
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE handshake SYSTEM "handshake.dtd">
 <handshake>
