@@ -1,17 +1,5 @@
 <?php
 
-/**
- * @file classes/depositObject.php
- *
- * Copyright (c) 2014-2023 Simon Fraser University
- * Copyright (c) 2000-2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
- *
- * @class DepositObject
- *
- * @brief Basic class describing a deposit object stored in the PLN
- */
-
 namespace APP\plugins\generic\pln\classes\depositObject;
 
 use APP\facades\Repo;
@@ -30,9 +18,9 @@ class DepositObject extends DataObject
     public function getContent(): Issue|Submission|null
     {
         return match ($this->getObjectType()) {
-            PlnPlugin::DEPOSIT_TYPE_ISSUE => Repo::issue()->get($this->getObjectId(), $this->getJournalId()),
+            PlnPlugin::DEPOSIT_TYPE_ISSUE => Repo::issue()->get($this->getObjectId()),
             'PublishedArticle', // Legacy (OJS pre-3.2)
-            PlnPlugin::DEPOSIT_TYPE_SUBMISSION => Repo::submission()->get($this->getObjectId(), $this->getJournalId()),
+            PlnPlugin::DEPOSIT_TYPE_SUBMISSION => Repo::submission()->get($this->getObjectId()),
             default => throw new Exception('Unknown object type')
         };
     }
