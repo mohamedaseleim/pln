@@ -4,7 +4,7 @@
     "license": "GPL-3.0-only",
     "require": {
         "php": "^8.2",
-        "whikloj/bagittools": "^4.2"
+        "whikloj/bagittools": "^5.0"
     },
     "config": {
         "classmap-authoritative": true,
