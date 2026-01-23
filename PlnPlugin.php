@@ -1,17 +1,5 @@
 <?php
 
-/**
- * @file PlnPlugin.php
- *
- * Copyright (c) 2014-2023 Simon Fraser University
- * Copyright (c) 2000-2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
- *
- * @class PlnPlugin
- *
- * @brief PLN plugin class
- */
-
 namespace APP\plugins\generic\pln;
 
 use APP\core\Application;
@@ -313,9 +301,9 @@ class PlnPlugin extends GenericPlugin
         if ($page !== 'pln' || $op !== 'deposits') {
             return Hook::CONTINUE;
         }
-        define('HANDLER_CLASS', PageHandler::class);
-        $handlerFile = & $args[2];
-        $handlerFile = "{$this->getHandlerPath()}/PageHandler.php";
+        
+        // OJS 3.5 requires setting the handler class in index 3 of the args array
+        $args[3] = PageHandler::class;
         return Hook::CONTINUE;
     }
 
@@ -496,7 +484,6 @@ class PlnPlugin extends GenericPlugin
             ->filterByRoleIds($userGroupIds)
             ->getMany();
         $notificationManager = new NotificationManager();
-        // TODO: This is going to notify all managers, perhaps only the technical contact should be notified?
         foreach ($managers as $manager) {
             $notificationManager->createTrivialNotification($manager->getId(), $notificationType);
         }
