@@ -1,24 +1,10 @@
 <?php
 
-/**
- * @file classes/form/SettingsForm.php
- *
- * Copyright (c) 2014-2023 Simon Fraser University
- * Copyright (c) 2000-2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
- *
- * @class SettingsForm
- *
- * @brief Form for journal managers to modify PLN plugin settings
- */
-
 namespace APP\plugins\generic\pln\classes\form;
 
 use APP\plugins\generic\pln\PlnPlugin;
 use APP\template\TemplateManager;
-use PKP\db\DAORegistry;
 use PKP\form\Form;
-use PKP\plugins\PluginSettingsDAO;
 
 class SettingsForm extends Form
 {
@@ -103,7 +89,7 @@ class SettingsForm extends Form
         $templateMgr = TemplateManager::getManager($request);
         $templateMgr->assign([
             'pluginName' => $this->plugin->getName(),
-            'hasIssn' => strlen($issn),
+            'hasIssn' => !empty($issn),
             'prerequisitesMissing' => $this->checkPrerequisites(),
             'journal_uuid' => $this->plugin->getSetting($this->contextId, 'journal_uuid'),
             'terms_of_use' => $this->plugin->getSetting($this->contextId, 'terms_of_use'),
@@ -122,8 +108,7 @@ class SettingsForm extends Form
         parent::execute(...$functionArgs);
         $this->plugin->updateSetting($this->contextId, 'terms_of_use_agreement', $this->getData('terms_of_use_agreement'), 'object');
 
-        /** @var PluginSettingsDAO */
-        $pluginSettingsDao = DAORegistry::getDAO('PluginSettingsDAO');
-        $pluginSettingsDao->installSettings($this->contextId, $this->plugin->getName(), $this->plugin->getContextSpecificPluginSettingsFile());
+        // Re-install settings (refresh) using the plugin's inherited method, avoiding deprecated DAORegistry
+        $this->plugin->installSettings($this->contextId, $this->plugin->getContextSpecificPluginSettingsFile());
     }
 }
