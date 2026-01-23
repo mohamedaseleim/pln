@@ -1,23 +1,10 @@
 <?php
-/**
- * @file classes/deposit/Repository.php
- *
- * Copyright (c) 2023 Simon Fraser University
- * Copyright (c) 2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
- *
- * @class Repository
- *
- * @brief A repository to find and manage deposits.
- */
 
 namespace APP\plugins\generic\pln\classes\deposit;
 
 use APP\core\Request;
-use APP\core\Services;
 use APP\plugins\generic\pln\PlnPlugin;
 use Illuminate\Support\LazyCollection;
-use PKP\core\Core;
 use PKP\file\ContextFileManager;
 use PKP\plugins\Hook;
 use PKP\services\PKPSchemaService;
@@ -87,30 +74,27 @@ class Repository
      */
     public function validate($deposit, $props, $allowedLocales, $primaryLocale): array
     {
-        /** @var PKPSchemaService */
-        $schemaService = Services::get('schema');
-
         $validator = ValidatorFactory::make(
             $props,
-            $schemaService->getValidationRules(Schema::SCHEMA_NAME, $allowedLocales)
+            $this->schemaService->getValidationRules(Schema::SCHEMA_NAME, $allowedLocales)
         );
 
         // Check required fields
         ValidatorFactory::required(
             $validator,
             $deposit,
-            $schemaService->getRequiredProps(Schema::SCHEMA_NAME),
-            $schemaService->getMultilingualProps(Schema::SCHEMA_NAME),
+            $this->schemaService->getRequiredProps(Schema::SCHEMA_NAME),
+            $this->schemaService->getMultilingualProps(Schema::SCHEMA_NAME),
             $allowedLocales,
             $primaryLocale
         );
 
         // Check for input from disallowed locales
-        ValidatorFactory::allowedLocales($validator, $schemaService->getMultilingualProps(Schema::SCHEMA_NAME), $allowedLocales);
+        ValidatorFactory::allowedLocales($validator, $this->schemaService->getMultilingualProps(Schema::SCHEMA_NAME), $allowedLocales);
 
         $errors = [];
         if ($validator->fails()) {
-            $errors = $schemaService->formatValidationErrors($validator->errors());
+            $errors = $this->schemaService->formatValidationErrors($validator->errors());
         }
 
         Hook::call('PreservationNetwork::Deposit::validate', [$errors, $deposit, $props, $allowedLocales, $primaryLocale]);
@@ -124,7 +108,7 @@ class Repository
     public function add(Deposit $deposit): int
     {
         if (!$deposit->getDateCreated()) {
-            $deposit->setDateCreated(Core::getCurrentDate());
+            $deposit->setDateCreated(date('Y-m-d H:i:s'));
         }
         $depositId = $this->dao->insert($deposit);
         $deposit = $this->get($depositId);
