@@ -1,15 +1,4 @@
 <?php
-/**
- * @file classes/deposit/Collector.php
- *
- * Copyright (c) 2023 Simon Fraser University
- * Copyright (c) 2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
- *
- * @class Collector
- *
- * @brief A helper class to configure a query builder to get a collection of deposits
- */
 
 namespace APP\plugins\generic\pln\classes\deposit;
 
