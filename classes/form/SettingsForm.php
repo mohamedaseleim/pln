@@ -1,10 +1,23 @@
 <?php
 
+/**
+ * @file classes/form/SettingsForm.php
+ *
+ * Copyright (c) 2014-2026 Simon Fraser University
+ * Copyright (c) 2000-2026 John Willinsky
+ * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
+ *
+ * @class SettingsForm
+ *
+ * @brief Form for journal managers to modify PLN plugin settings
+ */
+
 namespace APP\plugins\generic\pln\classes\form;
 
 use APP\plugins\generic\pln\PlnPlugin;
 use APP\template\TemplateManager;
 use PKP\form\Form;
+use PKP\db\DAORegistry;
 
 class SettingsForm extends Form
 {
@@ -108,7 +121,8 @@ class SettingsForm extends Form
         parent::execute(...$functionArgs);
         $this->plugin->updateSetting($this->contextId, 'terms_of_use_agreement', $this->getData('terms_of_use_agreement'), 'object');
 
-        // Re-install settings (refresh) using the plugin's inherited method, avoiding deprecated DAORegistry
-        $this->plugin->installSettings($this->contextId, $this->plugin->getContextSpecificPluginSettingsFile());
+        /** @var \PKP\plugins\PluginSettingsDAO $pluginSettingsDao */
+        $pluginSettingsDao = DAORegistry::getDAO('PluginSettingsDAO');
+        $pluginSettingsDao->installSettings($this->contextId, $this->plugin->getName(), $this->plugin->getContextSpecificPluginSettingsFile());
     }
 }
