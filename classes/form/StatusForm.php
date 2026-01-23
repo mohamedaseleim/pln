@@ -1,24 +1,10 @@
 <?php
 
-/**
- * @file classes/form/StatusForm.php
- *
- * Copyright (c) 2014-2023 Simon Fraser University
- * Copyright (c) 2000-2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
- *
- * @class StatusForm
- *
- * @brief Form for journal managers to check PLN plugin status
- */
-
 namespace APP\plugins\generic\pln\classes\form;
 
-use APP\plugins\generic\pln\classes\deposit\Repository;
 use APP\plugins\generic\pln\PlnPlugin;
 use APP\template\TemplateManager;
 use PKP\form\Form;
-use PKP\handler\PKPHandler;
 
 class StatusForm extends Form
 {
