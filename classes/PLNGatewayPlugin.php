@@ -1,17 +1,5 @@
 <?php
 
-/**
- * @file classes/PLNGatewayPlugin.php
- *
- * Copyright (c) 2014-2023 Simon Fraser University
- * Copyright (c) 2000-2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
- *
- * @class PLNGatewayPlugin
- *
- * @brief PLNGatewayPlugin component of web PLN plugin
- */
-
 namespace APP\plugins\generic\pln\classes;
 
 use APP\core\Application;
@@ -19,7 +7,6 @@ use APP\facades\Repo;
 use APP\plugins\generic\pln\PlnPlugin;
 use APP\submission\Submission;
 use APP\template\TemplateManager;
-use PKP\core\ArrayItemIterator;
 use PKP\plugins\GatewayPlugin;
 use PKP\plugins\PluginRegistry;
 use PKP\site\VersionCheck;
@@ -99,7 +86,7 @@ class PLNGatewayPlugin extends GatewayPlugin
     /**
      * @copydoc Plugin::getEnabled()
      */
-    public function getEnabled()
+    public function getEnabled(): bool
     {
         return $this->getPlugin()->getEnabled(); // Should always be true anyway if this is loaded
     }
@@ -111,17 +98,17 @@ class PLNGatewayPlugin extends GatewayPlugin
     {
         $plugin = $this->getPlugin();
         $templateMgr = TemplateManager::getManager($request);
-        $journal = $request->getJournal();
+        $context = $request->getContext();
 
         $pluginVersionFile = $this->getPluginPath() . '/version.xml';
         $pluginVersion = VersionCheck::parseVersionXml($pluginVersionFile);
         $templateMgr->assign('pluginVersion', $pluginVersion);
 
         $terms = [];
-        $termsAccepted = $plugin->termsAgreed($journal->getId());
+        $termsAccepted = $plugin->termsAgreed($context->getId());
         if ($termsAccepted) {
-            $terms = $plugin->getSetting($journal->getId(), 'terms_of_use');
-            $termsAgreement = $plugin->getSetting($journal->getId(), 'terms_of_use_agreement');
+            $terms = $plugin->getSetting($context->getId(), 'terms_of_use');
+            $termsAgreement = $plugin->getSetting($context->getId(), 'terms_of_use_agreement');
         }
 
         $termKeys = array_keys($terms);
@@ -137,7 +124,7 @@ class PLNGatewayPlugin extends GatewayPlugin
 
         $publications = Repo::submission()
             ->getCollector()
-            ->filterByContextIds([$journal->getId()])
+            ->filterByContextIds([$context->getId()])
             ->filterByStatus([Submission::STATUS_PUBLISHED])
             ->limit(static::PING_ARTICLE_COUNT)
             ->getMany()
@@ -149,10 +136,10 @@ class PLNGatewayPlugin extends GatewayPlugin
             'phpVersion' => PHP_VERSION,
             'hasZipArchive' => $plugin->hasZipArchive() ? 'Yes' : 'No',
             'hasTasks' => $plugin->hasScheduledTasks() ? 'Yes' : 'No',
-            'termsDisplay' => new ArrayItemIterator($termsDisplay),
+            'termsDisplay' => $termsDisplay,
             'ojsVersion' => Application::get()->getCurrentVersion()->getVersionString(),
             'publications' => $publications,
-            'pln_network' => $plugin->getSetting($journal->getId(), 'pln_network')
+            'pln_network' => $plugin->getSetting($context->getId(), 'pln_network')
         ]);
 
         header('content-type: text/xml; charset=utf-8');
