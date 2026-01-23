@@ -1,22 +1,11 @@
 <?php
-/**
- * @file classes/deposit/Schema.php
- *
- * Copyright (c) 2023 Simon Fraser University
- * Copyright (c) 2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
- *
- * @class Schema
- *
- * @brief Map deposits to the properties defined in the deposit schema
- */
 
 namespace APP\plugins\generic\pln\classes\deposit;
 
 use Illuminate\Support\Enumerable;
 use PKP\plugins\Hook;
 
-class Schema extends \PKP\core\maps\Schema
+class Schema extends \PKP\maps\Schema
 {
     public const SCHEMA_NAME = 'preservationNetworkDeposit';
     public string $schema = self::SCHEMA_NAME;
@@ -34,9 +23,9 @@ class Schema extends \PKP\core\maps\Schema
     }
 
     /**
-     * Map an author
+     * Map a deposit
      *
-     * Includes all properties in the announcement schema.
+     * Includes all properties in the deposit schema.
      */
     public function map(Deposit $item): array
     {
@@ -44,9 +33,9 @@ class Schema extends \PKP\core\maps\Schema
     }
 
     /**
-     * Summarize an author
+     * Summarize a deposit
      *
-     * Includes properties with the apiSummary flag in the author schema.
+     * Includes properties with the apiSummary flag in the deposit schema.
      */
     public function summarize(Deposit $item): array
     {
@@ -54,7 +43,7 @@ class Schema extends \PKP\core\maps\Schema
     }
 
     /**
-     * Map a collection of Authors
+     * Map a collection of Deposits
      *
      * @see self::map
      */
@@ -64,7 +53,7 @@ class Schema extends \PKP\core\maps\Schema
     }
 
     /**
-     * Summarize a collection of Authors
+     * Summarize a collection of Deposits
      *
      * @see self::summarize
      */
@@ -74,7 +63,7 @@ class Schema extends \PKP\core\maps\Schema
     }
 
     /**
-     * Map schema properties of an Author to an assoc array
+     * Map schema properties of a Deposit to an assoc array
      */
     protected function mapByProperties(array $props, Deposit $item): array
     {
