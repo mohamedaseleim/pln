@@ -1,19 +1,5 @@
 <?php
 
-/**
- * @file classes/deposit/DAO.php
- *
- * Copyright (c) 2023 Simon Fraser University
- * Copyright (c) 2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
- *
- * @class DAO
- *
- * @see Deposit
- *
- * @brief Operations for retrieving and modifying deposit objects.
- */
-
 namespace APP\plugins\generic\pln\classes\deposit;
 
 use Illuminate\Database\Query\Builder;
