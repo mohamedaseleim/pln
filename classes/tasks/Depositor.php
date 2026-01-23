@@ -2,27 +2,18 @@
 
 /**
  * @file classes/tasks/Depositor.php
- *
- * Copyright (c) 2014-2023 Simon Fraser University
- * Copyright (c) 2000-2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
- *
- * @class Depositor
- *
- * @brief Class to perform automated deposits of PLN object.
  */
 
 namespace APP\plugins\generic\pln\classes\tasks;
 
+use APP\facades\Repo;
 use APP\journal\Journal;
-use APP\journal\JournalDAO;
 use APP\plugins\generic\pln\classes\deposit\Deposit;
 use APP\plugins\generic\pln\classes\deposit\Repository as DepositRepository;
 use APP\plugins\generic\pln\classes\depositObject\Repository as DepositObjectRepository;
 use APP\plugins\generic\pln\classes\DepositPackage;
 use APP\plugins\generic\pln\PlnPlugin;
 use Exception;
-use PKP\db\DAORegistry;
 use PKP\file\ContextFileManager;
 use PKP\scheduledTask\ScheduledTask;
 use PKP\scheduledTask\ScheduledTaskHelper;
@@ -56,10 +47,10 @@ class Depositor extends ScheduledTask
     {
         $this->addExecutionLogEntry('PKP Preservation Network Processor', ScheduledTaskHelper::SCHEDULED_TASK_MESSAGE_TYPE_NOTICE);
 
-        /** @var JournalDAO */
-        $journalDao = DAORegistry::getDAO('JournalDAO');
-        // For all journals
-        foreach ($journalDao->getAll(true)->toIterator() as $journal) {
+        // OJS 3.5 Update: Use Repo::context() instead of JournalDAO
+        $journals = Repo::context()->getCollector()->filterByEnabled(true)->getMany();
+
+        foreach ($journals as $journal) {
             // if the plugin isn't enabled for this journal, skip it
             if (!$this->plugin->getSetting($journal->getId(), 'enabled')) {
                 continue;
