@@ -1,8 +1,8 @@
 {**
  * templates/handshake.tpl
  *
- * Copyright (c) 2014-2023 Simon Fraser University
- * Copyright (c) 2000-2023 John Willinsky
+ * Copyright (c) 2014-2026 Simon Fraser University
+ * Copyright (c) 2000-2026 John Willinsky
  * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
  *
  * Handshake template
@@ -21,9 +21,9 @@
 		<zipArchive>{$hasZipArchive|escape}</zipArchive>
 		<tasks>{$hasTasks|escape}</tasks>
 		<terms termsAccepted="{$termsAccepted|escape}">
-			{iterate from=termsDisplay item=term}
+			{foreach from=$termsDisplay item=term}
 			<term key="{$term.key|escape}" updated="{$term.updated|escape}" accepted="{$term.accepted|escape}">{$term.term|escape}</term>
-			{/iterate}
+			{/foreach}
 		</terms>
 	</pluginInfo>
 	<journalInfo>
