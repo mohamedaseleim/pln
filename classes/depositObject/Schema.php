@@ -1,22 +1,11 @@
 <?php
-/**
- * @file classes/depositObject/Schema.php
- *
- * Copyright (c) 2023 Simon Fraser University
- * Copyright (c) 2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
- *
- * @class Schema
- *
- * @brief Map deposit objects to the properties defined in the deposit object schema
- */
 
 namespace APP\plugins\generic\pln\classes\depositObject;
 
 use Illuminate\Support\Enumerable;
 use PKP\plugins\Hook;
 
-class Schema extends \PKP\core\maps\Schema
+class Schema extends \PKP\maps\Schema
 {
     public const SCHEMA_NAME = 'preservationNetworkDepositObject';
     public string $schema = self::SCHEMA_NAME;
@@ -34,9 +23,9 @@ class Schema extends \PKP\core\maps\Schema
     }
 
     /**
-     * Map an author
+     * Map a deposit object
      *
-     * Includes all properties in the announcement schema.
+     * Includes all properties in the schema.
      */
     public function map(DepositObject $item): array
     {
@@ -44,9 +33,9 @@ class Schema extends \PKP\core\maps\Schema
     }
 
     /**
-     * Summarize an author
+     * Summarize a deposit object
      *
-     * Includes properties with the apiSummary flag in the author schema.
+     * Includes properties with the apiSummary flag in the schema.
      */
     public function summarize(DepositObject $item): array
     {
@@ -54,7 +43,7 @@ class Schema extends \PKP\core\maps\Schema
     }
 
     /**
-     * Map a collection of Authors
+     * Map a collection of Deposit Objects
      *
      * @see self::map
      */
@@ -64,7 +53,7 @@ class Schema extends \PKP\core\maps\Schema
     }
 
     /**
-     * Summarize a collection of Authors
+     * Summarize a collection of Deposit Objects
      *
      * @see self::summarize
      */
@@ -74,7 +63,7 @@ class Schema extends \PKP\core\maps\Schema
     }
 
     /**
-     * Map schema properties of an Author to an assoc array
+     * Map schema properties of a Deposit Object to an assoc array
      */
     protected function mapByProperties(array $props, DepositObject $item): array
     {
