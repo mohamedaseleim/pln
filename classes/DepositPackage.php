@@ -1,23 +1,10 @@
 <?php
 
-/**
- * @file classes/DepositPackage.php
- *
- * Copyright (c) 2014-2023 Simon Fraser University
- * Copyright (c) 2000-2023 John Willinsky
- * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
- *
- * @class DepositPackage
- *
- * @brief Represent a PLN deposit package.
- */
-
 namespace APP\plugins\generic\pln\classes;
 
 use APP\core\Application;
 use APP\facades\Repo;
 use APP\journal\Journal;
-use APP\journal\JournalDAO;
 use APP\plugins\generic\pln\classes\deposit\Deposit;
 use APP\plugins\generic\pln\classes\deposit\Repository;
 use APP\plugins\generic\pln\classes\tasks\Depositor;
@@ -28,8 +15,6 @@ use DOMElement;
 use DOMXPath;
 use Exception;
 use PKP\config\Config;
-use PKP\core\Core;
-use PKP\db\DAORegistry;
 use PKP\file\ContextFileManager;
 use PKP\file\FileManager;
 use PKP\plugins\PluginRegistry;
@@ -113,10 +98,9 @@ class DepositPackage
     public function generateAtomDocument(): string
     {
         $plugin = PlnPlugin::loadPlugin();
-        /** @var JournalDAO */
-        $journalDao = DAORegistry::getDAO('JournalDAO');
+        
         /** @var Journal */
-        $journal = $journalDao->getById($this->deposit->getJournalId());
+        $journal = Repo::context()->get($this->deposit->getJournalId());
         $fileManager = new ContextFileManager($this->deposit->getJournalId());
 
         // set up folder and file locations
@@ -234,8 +218,6 @@ class DepositPackage
         require_once __DIR__ . '/../vendor/autoload.php';
 
         // get DAOs, plugins and settings
-        /** @var JournalDAO */
-        $journalDao = DAORegistry::getDAO('JournalDAO');
         /** @var NativeImportExportPlugin */
         $exportPlugin = PluginRegistry::loadPlugin('importexport', 'native');
         @ini_set('memory_limit', -1);
@@ -252,8 +234,10 @@ class DepositPackage
         $fileList = [];
         $fileManager = new FileManager();
 
-        $journal = $journalDao->getById($this->deposit->getJournalId());
+        // OJS 3.5: Use Repo::context() instead of JournalDAO
+        $journal = Repo::context()->get($this->deposit->getJournalId());
         $depositObjects = $this->deposit->getDepositObjects();
+        
         switch ($this->deposit->getObjectType()) {
             case 'PublishedArticle': // Legacy (OJS pre-3.2)
             case PlnPlugin::DEPOSIT_TYPE_SUBMISSION:
@@ -261,7 +245,13 @@ class DepositPackage
 
                 // we need to add all of the relevant submissions to an array to export as a batch
                 foreach ($depositObjects as $depositObject) {
-                    $submission = $submissionDao->getById($this->deposit->getObjectId());
+                    // OJS 3.5: Use Repo::submission()->get()
+                    $submission = Repo::submission()->get($depositObject->getObjectId());
+                    
+                    if (!$submission) {
+                        continue;
+                    }
+
                     if ($submission->getContextId() !== $journal->getId()) {
                         continue;
                     }
@@ -427,7 +417,7 @@ class DepositPackage
             );
             $this->logMessage(__('plugins.generic.pln.error.http.deposit', ['error' => $result['status'], 'message' => $result['error']]));
             $this->deposit->setExportDepositError(__('plugins.generic.pln.error.http.deposit', ['error' => $result['status'], 'message' => $result['error']]));
-            $this->deposit->setLastStatusDate(Core::getCurrentDate());
+            $this->deposit->setLastStatusDate(date('Y-m-d H:i:s'));
             Repository::instance()->edit($this->deposit);
             return;
         }
@@ -484,7 +474,7 @@ class DepositPackage
             }
         }
 
-        $this->deposit->setLastStatusDate(Core::getCurrentDate());
+        $this->deposit->setLastStatusDate(date('Y-m-d H:i:s'));
         Repository::instance()->edit($this->deposit);
     }
 
@@ -523,7 +513,7 @@ class DepositPackage
         } catch (Throwable $exception) {
             $this->logMessage(__('plugins.generic.pln.error.depositor.export.issue.error') . $exception->getMessage());
             $this->deposit->setExportDepositError($exception->getMessage());
-            $this->deposit->setLastStatusDate(Core::getCurrentDate());
+            $this->deposit->setLastStatusDate(date('Y-m-d H:i:s'));
             Repository::instance()->edit($this->deposit);
             return;
         }
@@ -539,7 +529,7 @@ class DepositPackage
         // update the deposit's status
         $this->deposit->setPackagedStatus();
         $this->deposit->setExportDepositError(null);
-        $this->deposit->setLastStatusDate(Core::getCurrentDate());
+        $this->deposit->setLastStatusDate(date('Y-m-d H:i:s'));
         Repository::instance()->edit($this->deposit);
     }
 
@@ -650,7 +640,7 @@ class DepositPackage
                 break;
             case 'agreement':
                 $this->deposit->setStatus(PlnPlugin::DEPOSIT_STATUS_PACKAGED | PlnPlugin::DEPOSIT_STATUS_TRANSFERRED | PlnPlugin::DEPOSIT_STATUS_RECEIVED | PlnPlugin::DEPOSIT_STATUS_VALIDATED | PlnPlugin::DEPOSIT_STATUS_SENT | PlnPlugin::DEPOSIT_STATUS_LOCKSS_RECEIVED | PlnPlugin::DEPOSIT_STATUS_LOCKSS_AGREEMENT);
-                $this->deposit->setPreservedDate(Core::getCurrentDate());
+                $this->deposit->setPreservedDate(date('Y-m-d H:i:s'));
                 break;
             default:
                 $this->deposit->setExportDepositError('Unknown LOCKSS state ' . $lockssState);
@@ -658,7 +648,7 @@ class DepositPackage
                 break;
         }
 
-        $this->deposit->setLastStatusDate(Core::getCurrentDate());
+        $this->deposit->setLastStatusDate(date('Y-m-d H:i:s'));
         Repository::instance()->edit($this->deposit);
     }
 
