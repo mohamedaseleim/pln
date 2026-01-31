@@ -7,7 +7,7 @@
  * Copyright (c) 2000-2026 John Willinsky
  * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
  *
- * @class PlnPlugin
+ * @class PlnPlugin - Updated to the clawd branch
  *
  * @brief PKP PLN plugin class
  */
